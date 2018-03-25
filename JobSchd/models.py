@@ -81,13 +81,13 @@ class JobFinal(models.Model):
     arc=models.BooleanField('Scenario Apply Region Controls',default=True)
     #control_variables:
     #   region
-    region_household= models.CharField('Control Variable Region Household', max_length=50, help_text='e.g.  [hhrtotals]',default='')
-    region_groupquarter= models.CharField('Control Variable Region Groupquarter', max_length=50, help_text='e.g.  [gqrtotals]',default='')
-    region_person= models.CharField('Control Variable Region Person', max_length=50, help_text='e.g.  [rpsex, rpage, rpworker, prtotals]',default='')
+    region_household= models.CharField('Control Variable Region Household', max_length=50, help_text='e.g.  [hhrtotals]',default='[hhrtotals]')
+    region_groupquarter= models.CharField('Control Variable Region Groupquarter', max_length=50, help_text='e.g.  [gqrtotals]',default='[gqrtotals]')
+    region_person= models.CharField('Control Variable Region Person', max_length=50, help_text='e.g.  [rpsex, rpage, rpworker, prtotals]',default='[rpsex, rpage, rpworker, prtotals]')
     #   geo
-    geo_household= models.CharField('Control Variable Geo Household', max_length=50, help_text='e.g.  [hhtotals, hinc, hsize]',default='')
-    geo_groupquarter= models.CharField('Control Variable Geo Groupquarter', max_length=50, help_text='e.g.  [gqtotals, gqtype]',default='')
-    geo_person= models.CharField('Control Variable Geo Person', max_length=50, help_text='e.g.  [pworker, ptotals] ',default='')
+    geo_household= models.CharField('Control Variable Geo Household', max_length=50, help_text='e.g.  [hhtotals, hinc, hsize]',default='[hhtotals, hinc, hsize]')
+    geo_groupquarter= models.CharField('Control Variable Geo Groupquarter', max_length=50, help_text='e.g.  [gqtotals, gqtype]',default='[gqtotals, gqtype]')
+    geo_person= models.CharField('Control Variable Geo Person', max_length=50, help_text='e.g.  [pworker, ptotals] ',default='[pworker, ptotals]')
     '''
         #Setting for IPF procedure, reweighting, and drawing household samples
         parameters:
