@@ -1,0 +1,183 @@
+              <div class="flex-grid">
+                  <div class="row flex-just-center cell2">
+
+                <form id="controlsform">
+                      <div class="input-control text modern big-input">
+                        <input type="text" name="scenariodescription">
+                        <span class="label">Enter Scenario Description
+                        </span>
+                        <span class="informer">e.g., Pop_Scenario1
+                        </span>
+                        <span class="placeholder">Scenario Description
+                        </span>
+                      </div>
+                  </form>
+              </div>
+              <div class="row flex-just-center cell2">
+                  <div class="cell size8" style="text-align: left">
+                    <h4>a. Select Control Variables for Household at {{ aggregate }} Level
+                    </h4>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <div class="cell size8">
+                    <form id="selection1" method="post" onSubmit="return selectAll()">
+                      <select multiple size="10" id="hhldaggrfrom" name="hhldaggrfrom[]">
+
+                      </select>
+                      <div class="controls">
+                        <span class="item">
+                          <a href="javascript:moveSelected('hhldaggrfrom', 'hhldaggrto')">&gt;
+                          </a>
+                        </span>
+                        <span class="item">
+                          <a href="javascript:moveSelected('hhldaggrto', 'hhldaggrfrom')">&lt;
+                          </a>
+                        </span>
+                      </div>
+                      <select multiple id="hhldaggrto" name="hhldaggrto[]" size="10" >
+                      </select>
+                    </form>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <br>
+                  <div class="cell size8" style="text-align: left">
+                    <h4>b. Select Control Variables for Person at {{ aggregate }} Level
+                    </h4>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <div class="cell size8">
+                    <form id="selection2" method="post" onSubmit="return selectAll()">
+                      <select multiple size="10" id="personaggrfrom" name="personaggrfrom[]">
+
+                      </select>
+                      <div class="controls">
+                        <span class="item">
+                          <a href="javascript:moveSelected('personaggrfrom', 'personaggrto')">&gt;
+                          </a>
+                        </span>
+                        <span class="item">
+                          <a href="javascript:moveSelected('personaggrto', 'personaggrfrom')">&lt;
+                          </a>
+                        </span>
+                      </div>
+                      <select multiple id="personaggrto" size="10"  name="personaggrto[]">
+                      </select>
+                    </form>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <br>
+                  <div class="cell size8" style="text-align: left">
+                    <h4>c. Select Control Variables for Household at {{ disaggregate }} Level
+                    </h4>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <div class="cell size8">
+                    <form id="selection3" method="post" onSubmit="return selectAll()">
+                      <select multiple size="10" id="hhlddaggrfrom" name="hhlddaggrfrom[]">
+
+                      </select>
+                      <div class="controls">
+                        <span class="item">
+                          <a href="javascript:moveSelected('hhlddaggrfrom', 'hhlddaggrto')">&gt;
+                          </a>
+                        </span>
+                        <span class="item">
+                          <a href="javascript:moveSelected('hhlddaggrto', 'hhlddaggrfrom')">&lt;
+                          </a>
+                        </span>
+                      </div>
+                      <select multiple id="hhlddaggrto" size="10" name="hhlddaggrto[]">
+                      </select>
+                    </form>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <br>
+                  <div class="cell size8" style="text-align: left">
+                    <h4>d. Select Control Variables for Person at {{ disaggregate }} Level
+                    </h4>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <div class="cell size8">
+                    <form id="selection4" method="post" onSubmit="return selectAll()">
+                      <select multiple size="10" id="persondaggrfrom" name="persondaggrfrom[]">
+
+                      </select>
+                      <div class="controls">
+                        <span class="item">
+                          <a href="javascript:moveSelected('persondaggrfrom', 'persondaggrto')">&gt;
+                          </a>
+                        </span>
+                        <span class="item">
+                          <a href="javascript:moveSelected('persondaggrto', 'persondaggrfrom')">&lt;
+                          </a>
+                        </span>
+                      </div>
+                      <select multiple id="persondaggrto" size="10"  name="persondaggrto[]">
+                      </select>
+                    </form>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <br>
+                  <div class="cell size8" style="text-align: left">
+                    <h4>e. Select Control Variables for Household at Groupquarter Level
+                    </h4>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <div class="cell size8">
+                    <form id="selection5" method="post" onSubmit="return selectAll()">
+                      <select multiple size="10" id="hhldgqfrom" name="hhldgqfrom[]">
+
+                      </select>
+                      <div class="controls">
+                        <span class="item">
+                          <a href="javascript:moveSelected('hhldgqfrom', 'hhldgqto')">&gt;
+                          </a>
+                        </span>
+                        <span class="item">
+                          <a href="javascript:moveSelected('hhldgqto', 'hhldgqfrom')">&lt;
+                          </a>
+                        </span>
+                      </div>
+                      <select multiple id="hhldgqto" size="10" name="hhldgqto[]">
+                      </select>
+                    </form>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <br>
+                  <div class="cell size8" style="text-align: left">
+                    <h4>f. Select Control Variables for Person at Groupquarter Level
+                    </h4>
+                  </div>
+                </div>
+              <div class="row flex-just-center cell2">
+                  <div class="cell size8">
+                    <form id="selection6" method="post" onSubmit="return selectAll()">
+                      <select multiple size="10" id="persongqfrom" name="persongqfrom[]">
+
+                      </select>
+                      <div class="controls">
+                        <span class="item">
+                          <a href="javascript:moveSelected('persongqfrom', 'persongqto')">&gt;
+                          </a>
+                        </span>
+                        <span class="item">
+                          <a href="javascript:moveSelected('persongqto', 'persongqfrom')">&lt;
+                          </a>
+                        </span>
+                      </div>
+                      <select multiple id="persongqto" size="10"  name="persongqfrom[]">
+                      </select>
+                    </form>
+                  </div>
+                </div>
+              </div>

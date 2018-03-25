@@ -1,0 +1,34 @@
+{% extends 'JobSchd/base.html' %}
+{% block base_site %}
+    {{ block.super }}
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      {% if user.is_authenticated %}
+      <h3> {{ user.username }}</h3>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      {% endif %}
+    </div>
+
+      <div class="col-sm-10  text-left">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default text-left">
+            <div class="panel-body bg-1">
+                <h2>PopGen On Cloud</h2>
+                <h3>Synthetic Population Generator</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+{% block body_site %}
+{% endblock %}
+      <hr>
+      <h3>Test</h3>
+      <p>Lorem ipsum...</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

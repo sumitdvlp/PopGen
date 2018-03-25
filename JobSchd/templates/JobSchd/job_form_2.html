@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+            {% load staticfiles %}
+PopGen{% endblock %}</title>
+
+          <link href="{%  static 'css/' %}" type="text/javascript" rel="stylesheet">
+            <link href="{%  static 'js/' %}" type="text/javascript">
+
+        <link href="{%  static 'css/metro.css' %}" type="text/css" rel="stylesheet">
+
+      <link href="{%  static 'css/metro.css' %}" type="text/css" rel="stylesheet">
+      <link href="{%  static 'css/metro-icons.min.css' %}" type="text/css" rel="stylesheet">
+      <link href="{%  static 'css/metro-responsive.min.css' %}" type="text/css" rel="stylesheet">
+      <link href="{%  static 'css/metro-rtl.min.css' %}" type="text/css" rel="stylesheet">
+      <link href="{%  static 'css/metro-schemes.min.css' %}" type="text/css" rel="stylesheet">
+
+      <script src="{%  static 'scripts/jquery.js' %}" ></script>
+      <script src="{%  static 'js/stickyfill.min.js' %}" ></script>
+      <script src="{%  static 'js/metro.js' %}" ></script>
+      <script src="{%  static 'js/angular.min.js' %}" ></script>
+        <script src="{%  static 'js/custom.js' %}" ></script>
+
+
+	<link rel="icon" href="{%  static 'popgen.ico' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  </head>
+
+
+  <body>
+  {% include 'JobSchd/NavBar.html' %}
+
+    <div class="flex-grid" style="width:70%;margin: 0 auto" ng-app="">
+      <h1 class="text-light">PopGen 2.0 E Drive
+      </h1>
+      <div class="app-bar teal" data-role="appbar">
+        <a class="app-bar-element active" href="#">PopGen
+        </a>
+        <span class="app-bar-divider">
+        </span>
+        <ul class="app-bar-menu">
+          <li>
+            <a href="">SimTravel.org
+            </a>
+          </li>
+          <li>
+            <a href="">Documentation
+            </a>
+          </li>
+          <li>
+            <a href="">GitHub
+            </a>
+          </li>
+		  <li>
+            <a href="">Contact Us
+            </a>
+          </li>
+		  <li>
+            <a href="">About
+            </a>
+          </li>
+          <li>
+            <a href="joutput.html">Output of Job(s)
+            </a>
+          </li>
+        </ul>
+      </div>
+        <ul class="breadcrumbs2 large" id="navbar">
+        <li class="active" onclick="show('project')">
+          <a href="#project">
+            <span class="mif-home">&nbspProject
+            </span>
+          </a>
+        </li>
+        <li onclick="show('controls')">
+          <a href="#controls">
+            <span class="mif-keyboard">&nbspControls
+            </span>
+          </a>
+        </li>
+        <li onclick="show('parameters')">
+          <a href="#parameters">
+            <span class="mif-cogs">&nbspParameters
+            </span>
+          </a>
+        </li>
+        <li onclick="show('geographies')">
+          <a href="#geographies">
+            <span class="mif-earth">&nbspGeographies
+            </span>
+          </a>
+        </li>
+        <li onclick="show('output')">
+          <a href="#output">
+            <span class="mif-stack">&nbspOutput
+            </span>
+          </a>
+        </li>
+        <li onclick="show('synthesis')">
+          <a href="#synthesis">
+            <span class="mif-magic-wand">&nbspSynthesis
+            </span>
+          </a>
+        </li>
+      </ul>
+      <div class="row flex-just-sb">
+        <div class="cell colspan12">
+          <div id="project" style="" class="page">		  
+            <div class="flex-grid">
+                        <div class="flex-align-center">
+
+                {% if error_message %}
+                    <p><strong>{{ error_message }}</strong></p>
+                {% endif %}
+                {% include 'JobSchd/Page1-Section1.html' %}
+                        </div>
+            </div>
+            <br>
+            <div class="flex-grid">
+                {% include 'JobSchd/Page1-Section2.html' %}
+                {% include 'JobSchd/Page1-Section3.html' %}
+
+            </div>
+
+          </div>
+
+
+          <div id="controls" style="display:none" class="page">
+                {% include 'JobSchd/Page2.html' %}
+          </div>
+
+          <div id="parameters" style="display:none" class="page">
+              {% include 'JobSchd/Page3.html' %}
+          </div>
+
+          <div id="geographies" style="display:none" class="page">
+              {% include 'JobSchd/Page4.html' %}
+          </div>
+          <div id="output" style="display:none" class="page">
+              {% include 'JobSchd/Page5.html' %}
+          </div>
+		  <br>
+          <div id="synthesis" style="display:none" class="page">
+              {% include 'JobSchd/Page6.html' %}
+        </div>
+      </div>
+    </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/custom.js">
+  </script>
+</html>

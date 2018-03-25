@@ -1,0 +1,119 @@
+		  <form id="paramform">
+            <div class="flex-grid">
+            <div class="row flex-just-center cell4">
+                <div class="cell size4" style="text-align: left">
+                  <h4>a. Enter IPF (Iterative Proportional Fitting) Settings
+                  </h4>
+                </div>
+              </div>
+            <div class="row flex-just-center cell4">
+                <div class="cell size2">
+				  <p>Tolerance</p>
+				  <input type="range" id="ipftolerance" name="ipftolerance" min="0.0001" max="0.1" value="0" step="0.0001" oninput="ipftoleranceout.value=ipftolerance.value">
+				  <output name="ipftoleranceout">0</output>
+                </div>
+                &nbsp;&nbsp;
+				<div class="cell size2">
+				  <p>Iterations</p>
+				  <input type="range" id="ipfiterations" name="ipfiterations" min="0" max="100" value="0" step="10" oninput="ipfiterationsout.value=ipfiterations.value;ipfarchive.max=ipfiterations.value">
+				  <output name="ipfiterationsout">1</output>
+                </div>
+				&nbsp;&nbsp;
+                <div class="cell size3">
+				  <p>Zero Marginal Correction</p>
+				  <input type="range" id="ipfzero" name="ipfzero" min="0" max="0.001" value="0" step="0.00001" oninput="ipfzeroout.value=ipfzero.value">
+				  <output name="ipfzeroout">0.00001</output>
+                </div>
+                &nbsp;&nbsp;
+				<div class="cell size2">
+				  <p>Archive Performance</p>
+				   <input type="range" id="ipfarchive" name="ipfarchive" min="1" max="1000" value="0" step="1" oninput="ipfarchiveout.value=ipfarchive.value">
+				  <output name="ipfarchiveout">1</output>
+                </div>
+              </div>
+
+            <div class="row flex-just-center">
+                <div class="cell size6">
+                  <p>Select Rounding Procedure</p>
+                  <div class="input-control select size8" data-role="input" style="height: 30px">
+                    <select name="roundingproc">
+                      <option>bucket</option>
+                      <option>bucket2</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row flex-just-center cell4">
+                <div class="cell size4" style="text-align: left">
+                  <h4>b. Enter Reweighting Settings
+                  </h4>
+                </div>
+            </div>
+
+            <div class="row flex-just-center cell4">
+				 <div class="cell size2">
+				  <p>Tolerance</p>
+				  <input type="range" id="retolerance" name="retolerance" min="0.0001" max="0.1" value="0" step="0.0001" oninput="retoleranceout.value=retolerance.value">
+				  <output name="retoleranceout">0</output>
+                </div>
+                                &nbsp;&nbsp;
+				<div class="cell size2">
+				  <p>Inner Iterations</p>
+				  <input type="range" id="reiniterations" name="reiniterations" min="1" max="10" value="0" step="1" oninput="reiniterationsout.value=reiniterations.value">
+				  <output name="reiniterationsout">1</output>
+                </div>                &nbsp;&nbsp;
+				<div class="cell size2">
+				  <p>Outer Iterations</p>
+				  <input type="range" id="reoutiterations" name="reoutiterations" min="0" max="500" value="0" step="50" oninput="reoutiterationsout.value=reoutiterations.value;rearchive.max=reoutiterations.value">
+				  <output name="reoutiterationsout">1</output>
+                </div>                &nbsp;&nbsp;
+				<div class="cell size2">
+				  <p>Archive Performance</p>
+				   <input type="range" id="rearchive" name="rearchive" min="1" max="1000" value="0" step="1" oninput="rearchiveout.value=rearchive.value">
+				  <output name="rearchiveout">1</output>
+                </div>
+			</div>
+            <div class="row flex-just-center">
+                <div class="cell size6">
+                  <p>Select Reweighting Procedure</p>
+                  <div class="input-control select size8" data-role="input" style="height: 30px">
+                    <select name="reweightproc">
+                      <option>ipu</option>
+					  <option>entropy</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              </div>
+            <div class="row flex-just-center cell4">
+                <div class="cell size4" style="text-align: left">
+                  <h4>c. Enter Draws Settings
+                  </h4>
+                </div>
+              </div>
+			  <div class="row flex-just-sa">
+			  <div class="cell size3">
+				  <p>P-Value Tolerance</p>
+				  <input type="range" id="pval" name="pval" min="0.9" max="0.99999" value="0" step="0.00001" oninput="pvalout.value=pval.value">
+				  <output name="pvalout">0</output>
+                </div>
+				<div class="cell size3">
+				  <p>Iterations</p>
+				  <input type="range" id="drawsiterations" name="drawsiterations" min="1" max="25" value="0" step="1" oninput="drawsiterationsout.value=drawsiterations.value">
+				  <output name="drawsiterationsout">1</output>
+                </div>
+                <div class="cell size3">
+                  <div class="input-control modern text">
+                    <input name="seed" type="number">
+                    <span class="label">Seed
+                    </span>
+                    <span class="informer">e.g., 250
+                    </span>
+                    <span class="placeholder">Seed
+                    </span>
+                  </div>
+                  <br>
+                </div>
+              </div>
+            </form>

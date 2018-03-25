@@ -1,0 +1,172 @@
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    synthesize=models.BooleanField('Synthesize',help_text='',default=True)
+
+    job_name = models.CharField(max_length=50,blank=False,null=False,help_text='Conneticut_Run',unique=True)
+    project_name = models.CharField(max_length=50,help_text='Connecticut_Synthetic_Population')
+    HouseEN = models.CharField('Household Entity Name',max_length=50,help_text='hhld',)
+    PersonEN = models.CharField('Person Entity Name',max_length=50,help_text='person')
+    GrpQtrEn = models.CharField('Groupquater Entity Name',max_length=50,help_text='gq')
+    AggSpUN = models.CharField('Aggregate Spatial Unit',max_length=50,help_text='County',default='Region')
+    GeoAggSU = models.CharField('Disaggregate Spatial Unit',max_length=50,help_text='TAZ',default='Geo')
+    SmplSpatialUn=models.CharField('Sample Spatial Unit',max_length=50,help_text='PUMA',default='Sample')
+    '''
+     inputs:
+      entities: [household, groupquarter, person] ## Add as a list
+      housing_entities: [household, groupquarter] # Add as a list
+      person_entities: [person] # Add as a list
+    '''
+    entities=models.CharField('Entities',max_length=50,help_text='[household, groupquarter, person]',default='[household, groupquarter, person]')
+    housing_entities = models.CharField('Housing Entities', max_length=50, help_text='[household, groupquarter]',default='[household, groupquarter]')
+    person_entities = models.CharField('Person Entities', max_length=50, help_text='[person]',default='[person]')
+
+    Household_Sample_File = models.FileField('Household Sample File',upload_to=document, blank=True, null=True)
+    Person_Sample_File = models.FileField('Person Sample File',upload_to=document, blank=True, null=True)
+    Groupquarter_Sample_File = models.FileField('Groupquarter Sample File',upload_to=document, blank=True, null=True)
+
+    Agg_Household_Marginal_File = models.FileField('Aggregate Household Marginal File',upload_to=document, blank=True, null=True)
+    Agg_Person_Marginal_File = models.FileField('Aggregate Person Marginal File',upload_to=document, blank=True, null=True)
+    Agg_Groupquarter_Marginal_File = models.FileField('Aggregate Groupquarter Marginal File',upload_to=document, blank=True, null=True)
+
+    Geo_Household_Marginal_File = models.FileField('Disaggregate Household Marginal File',upload_to=document, blank=True, null=True)
+    Geo_Person_Marginal_File = models.FileField('Disaggregate Person Marginal File',upload_to=document, blank=True, null=True)
+    Geo_Groupquarter_Marginal_File = models.FileField('Disaggregate Groupquarter Marginal File',upload_to=document, blank=True, null=True)
+
+    Agg_Geo_Mapping_File = models.FileField('Aggregate Disaggregate Mapping File',upload_to=document, blank=True, null=True)
+    Sample_Agg_Mapping_File = models.FileField('Sample Aggregate Mapping File',upload_to=document, blank=True, null=True)
+    Sample_Geo_Mapping_File = models.FileField('Sample Disaggregate Mapping File',upload_to=document, blank=True, null=True)
+    '''
+    #Brief description
+        - description: Connecticut TAZ Scenario
+    #If control variables are applied in multi-environment (geo and region), true
+    apply_region_controls: True
+    #Based on input setting, write down header name for each value
+    control_variables:
+     region:
+      household: [hhrtotals] # a. Select Control Variables for Household at County Level
+      groupquarter: [gqrtotals] # GroupQuarter at Region LEvel
+      person: [rpsex, rpage, rpworker, prtotals] #b
+     geo:
+      household: [hhtotals, hinc, hsize] #c
+      groupquarter: [gqtotals, gqtype] # groupquarter at geo level
+      person: [pworker, ptotals] #d
+    '''
+    desc= models.CharField('Scenario Description', max_length=50, help_text='Connecticut TAZ Scenario',default='Brief description')
+    arc=models.BooleanField('Apply Region Controls',default=True)
+    #control_variables:
+    #   region
+    region_household= models.CharField('Region Household', max_length=50, help_text='eg. [hhrtotals]',default='')
+    region_groupquarter= models.CharField('Region Groupquarter', max_length=50, help_text='eg. [gqrtotals]',default='')
+    region_person= models.CharField('Region Person', max_length=50, help_text='eg. [rpsex, rpage, rpworker, prtotals]',default='')
+    #   geo
+    geo_household= models.CharField('Geo Household', max_length=50, help_text='eg. [hhtotals, hinc, hsize] ',default='')
+    geo_groupquarter= models.CharField('Geo Groupquarter', max_length=50, help_text='eg. [gqtotals, gqtype]',default='')
+    geo_person= models.CharField('Geo Person', max_length=50, help_text='eg. [pworker, ptotals] ',default='')
+
+    '''
+        #Setting for IPF procedure, reweighting, and drawing household samples
+        parameters:
+         ipf:
+          tolerance: 0.0001
+          iterations: 250
+          zero_marginal_correction: 0.00001
+          rounding_procedure: bucket
+          #What is the index '1' indicating? 1 hour or 1 min?
+          archive_performance_frequency: 1 
+        #Select either IPU or Entropy
+         reweighting:
+          procedure: ipu
+          tolerance: 0.0001
+          inner_iterations: 1
+          outer_iterations: 50
+          archive_performance_frequency: 1
+         draws:
+          pvalue_tolerance: 0.9999
+          iterations: 25
+          seed: 0
+    '''
+    ipf_tolerance=models.DecimalField('Tolerance',max_digits=20,decimal_places=10,default=0.0001)
+    iterations=models.IntegerField('Iterations',max_length=10,default=1)
+    zmc=models.DecimalField('Zero Marginal Correction',max_digits=20,decimal_places=10,default=0.00001)
+    RP_Opt = (
+        ('bucket', 'bucket'),)
+    rp = models.CharField('Rounding Procedure',max_length=50, choices=RP_Opt,  default='bucket')
+    apf = models.IntegerField('Archive Performance Frequency',default=1)
+
+    '''
+    reweighting:
+      procedure: ipu
+      tolerance: 0.0001
+      inner_iterations: 1
+      outer_iterations: 50
+      archive_performance_frequency: 1
+     draws:
+      pvalue_tolerance: 0.9999
+      iterations: 25
+      seed: 0
+    '''
+    #reweighting
+    Proc_Opt = (
+        ('IPU', 'IPU'),('Entropy', 'Entropy'),)
+    procedure = models.CharField('Procedure',max_length=50, choices=Proc_Opt,  default='IPU')
+    rew_tolerance=models.DecimalField('Tolerance',max_digits=20,decimal_places=10,default= 0.0001)
+    inner_iterations = models.IntegerField('Inner Iterations',default=1)
+    outer_iterations = models.IntegerField('Outer Iterations',default=1000)
+    rapf = models.IntegerField('Archive Performance Frequency',default=1)
+    # draws:
+    pvalue_tolerance=models.DecimalField('Pvalue Tolerance',max_digits=20,decimal_places=10,default=0.9999)
+    draws_iterations = models.IntegerField('Iterations',default=1)
+    seed = models.IntegerField('Seed',default=0)
+
+    '''
+        geos_to_synthesize:
+     region:
+     #Leave empty blank if we synthesize specific region, then use ID
+      ids: [1,2,3,4,5,6,7,8,9,10,11,12]
+      all_ids: True
+     geo:
+      ids: []
+      all_ids: True
+    '''
+    '''
+        geos_to_synthesize:
+     region:
+     #Leave empty blank if we synthesize specific region, then use ID
+      ids: [1,2] - #a. Select County(s) to synthesize
+      all_ids: True
+     geo:
+      ids: [] #b. TAZ(s) being synthesized
+      all_ids: True
+    '''
+    #geos_to_synthesize
+        #region
+    region_ids = models.CharField('Region Ids',max_length=50, help_text='[1,2,3,4,5,6,7,8,9,10,11,12,13,14]',default=['[1,2,3'])
+    region_all_ids=models.BooleanField('Region All Ids',default=True)
+        #geo
+    geo_ids = models.CharField('Geo Ids',max_length=50, help_text='[1,2,3,4,5,6,7,8,9,10,11,12,13,14]',default=['[1,2,3'])
+    geo_all_ids=models.BooleanField('Geo All Ids',default=True)
+
+    '''
+        outputs:
+     performance: [ipf, reweighting, drawing]
+     weights:
+      export: True
+      collate_across_geos: False
+     multiway:
+      - variables: [hsize, hinc]
+        filename: hhsize_income.csv
+        filetype: csv
+        entity: household
+      - variables: [rpsex, rpage]
+        filename: rpsex_rpage.csv
+        filetype: csv
+        entity: person
+    '''
+
+    performance= models.CharField('Performance',max_length=50, help_text='[ipf, reweighting, drawing]',default='[ipf, reweighting, drawing]')
+    export=models.BooleanField('Export',default=True)
+    collate_across_geos=models.BooleanField('Collate Across Geos',default=False)
+    #multiway
+    multiway_variables = models.CharField('Multiway Variables',max_length=50, help_text='[hsize, hinc]',default='[hsize, hinc]')
+    filename = models.CharField('Filename',max_length=50, help_text='hhsize_income.csv',default='hhsize_income.csv')
+    filetype = models.CharField('Filetype', max_length=50,help_text='csv',default='csv')
+    entity = models.CharField('Entity',max_length=50, help_text='household or person',default='person')

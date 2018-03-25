@@ -1,0 +1,179 @@
+
+<form id="plabel" action="" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             {% block form_fields %}
+              <div class="row flex-just-center cell4">
+                 <div class="cell size3">
+
+                  {% with form.job_name as field %}
+                  <div class="input-control modern text">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+
+                    <input type="text" name="job_name" id="job_name">
+                    <span class="label">Job Name</span>
+                    <span class="informer">e.g., PopGen_Project</span>
+                    <span class="placeholder">Job Name</span>
+                  </div>
+               {% endwith %}
+               </div>
+               <div class="cell size3">
+              {% with form.job_priority as field %}
+                  <div class="input-control modern text">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+
+                    <input type="text" name="job_priority" id="job_priority">
+                    <span class="label">Job Priority</span>
+                    <span class="informer">e.g., 1,2</span>
+                    <span class="placeholder">Job Priority</span>
+                  </div>
+               {% endwith %}
+               </div>
+               <div class="cell size3">
+
+              {% with form.project_name as field %}
+                  <div class="input-control modern text">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+                    <input type="text" name="project_name" id="project_name">
+                    <span class="label">project_name</span>
+                    <span class="informer">e.g., 1,2</span>
+                    <span class="placeholder">Project Name</span>
+                  </div>
+               {% endwith %}
+              </div>
+              </div>
+
+
+              <div class="row flex-just-center cell3">
+                             <div class="cell size3">
+
+              {% with form.HouseEN as field %}
+                  <div class="input-control modern text">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+
+                    <input type="text" name="HouseEN" id="HouseEN">
+                    <span class="label">HouseEN
+                    </span>
+                    <span class="informer">e.g., 1,2
+                    </span>
+                    <span class="placeholder">Household Entity Name
+                    </span>
+                  </div>
+               {% endwith %}
+                             </div>
+               <div class="cell size3">
+
+              {% with form.PersonEN as field %}
+                  <div class="input-control modern text">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+
+                    <input type="text" name="PersonEN" id="PersonEN">
+                    <span class="label">PersonEN
+                    </span>
+                    <span class="informer">e.g., 1,2
+                    </span>
+                    <span class="placeholder">Person Entity Name
+                    </span>
+                  </div>
+               {% endwith %}
+               </div>
+                             <div class="cell size3">
+
+              {% with form.GrpQtrEn as field %}
+                  <div class="input-control modern text">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+
+                    <input type="text" name="GrpQtrEn" id="GrpQtrEn">
+                    <span class="label">GrpQtrEn
+                    </span>
+                    <span class="informer">e.g., 1,2
+                    </span>
+                    <span class="placeholder">Group Quarter Entity
+                    </span>
+                  </div>
+               {% endwith %}
+              </div>
+              </div>
+
+              <div class="row flex-just-center cell3">
+               <div class="cell size3">
+
+              {% with form.AggSpUN as field %}
+                  <div class="input-control modern text">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+
+                    <input type="text" name="AggSpUN" id="AggSpUN" ng-model="aggregate">
+                    <span class="label">AggSpUN
+                    </span>
+                    <span class="informer">e.g., 1,2
+                    </span>
+                    <span class="placeholder">Aggregate Spatial Unit Name
+                    </span>
+                  </div>
+               {% endwith %}
+               </div>
+               <div class="cell size3">
+
+              {% with form.GeoAggSU as field %}
+                  <div class="input-control modern text">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+
+                    <input type="text" name="GeoAggSU" id="GeoAggSU">
+                    <span class="label">GeoAggSU
+                    </span>
+                    <span class="informer">e.g., 1,2
+                    </span>
+                    <span class="placeholder">Disaggregate Spatial Unit
+                    </span>
+                  </div>
+              {% endwith %}
+              </div>
+
+
+              </div>
+
+              <div class="row flex-just-center cell3">
+
+              <div class="cell size3">
+
+                  {% with form.file as field %}
+                  <div class="input-control modern file" data-role="input">
+                      {% for error in field.errors %}
+                            <div class="alert alert-warning">{{ error }}</div>
+                      {% endfor %}
+
+                    <input class="input-control modern file" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+              {% endwith %}
+              </div>
+              </div>
+
+              {% endblock %}
+              <div class="row flex-just-center cell3">
+
+                        <div class="form-group">
+                                <div class="col-sm-offset2 col-sm-10">
+                                    <button type="submit" class="btn-primary">Submit</button>
+                                </div>
+                        </div>
+              </div>
+			  </form>

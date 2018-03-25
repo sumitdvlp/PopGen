@@ -1,0 +1,42 @@
+            <div class="flex-grid">
+            <div class="row flex-just-center cell2">
+                <div class="cell size6" style="text-align: left">
+                  <h4>a. Select {{ aggregate }}(s) to synthesize
+                  </h4>
+                </div>
+              </div>
+            <div class="row flex-just-center cell4">
+                <div class="cell size10">
+                  <form id="regionssynth" method="post" onSubmit="return selectAll()">
+                    <select multiple size="10" id="aggrsynthfrom">
+
+                    </select>
+                    <div class="controls">
+                      <span class="item">
+                        <a href="javascript:moveSelected('aggrsynthfrom', 'aggrsynthto')">&gt;
+                        </a>
+                      </span>
+                      <span class="item">
+                        <a href="javascript:moveSelected('aggrsynthto', 'aggrsynthfrom')">&lt;
+                        </a>
+                      </span>
+                    </div>
+                    <select multiple id="aggrsynthto" name="aggrsynthto[]" size="10"  >
+                    </select>
+                  </form>
+                </div>
+              </div>
+            <div class="row flex-just-center cell4">
+                <br>
+                <div class="cell size6" style="text-align: left">
+                  <h4>b. {{ disaggregate }}(s) being synthesized
+                  </h4>
+                </div>
+              </div>
+            <div class="row flex-just-center cell4">
+                <div class="cell size10">
+                    <select multiple style="width:96.5%;text-align:center;" id="disaggrsynthto" size="10" >
+                    </select>
+                </div>
+              </div>
+            </div>

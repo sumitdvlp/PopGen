@@ -1,0 +1,32 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+            {% load staticfiles %}PopGen{% endblock %}</title>
+
+      <link href="{%  static 'css/metro.css' %}" type="text/css" rel="stylesheet">
+      <link href="{%  static 'css/metro-icons.min.css' %}" type="text/css" rel="stylesheet">
+      <link href="{%  static 'css/metro-responsive.min.css' %}" type="text/css" rel="stylesheet">
+      <link href="{%  static 'css/metro-rtl.min.css' %}" type="text/css" rel="stylesheet">
+      <link href="{%  static 'css/metro-schemes.min.css' %}" type="text/css" rel="stylesheet">
+
+      <script src="{%  static 'scripts/jquery.js' %}" ></script>
+      <script src="{%  static 'js/stickyfill.min.js' %}" ></script>
+      <script src="{%  static 'js/metro.js' %}" ></script>
+      <script src="{%  static 'js/angular.min.js' %}" ></script>
+
+	<link rel="icon" href="{%  static 'popgen.ico' %}">
+  </head>
+  <body>
+    <div class="flex-grid" style="width:70%;margin: 0 auto" ng-app="">
+      <h1 class="text-light">PopGen 2.0 E Drive
+      </h1>
+      <div id="result">
+        Data will appear here shortly.
+      </div>
+    </div>  
+  </body>
+  <script type="text/javascript" src="js/load_output.js">
+  </script>
+</html>

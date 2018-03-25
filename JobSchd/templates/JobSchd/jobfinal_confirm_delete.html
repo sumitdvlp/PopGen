@@ -1,0 +1,26 @@
+{% extends 'JobSchd/base.html' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        {% block content %}
+                            <h1>Delete Job</h1>
+
+                            <p>Are you sure you want to delete the Job: {{ JobFinal }}?</p>
+
+                            <form action="" method="POST">
+                              {% csrf_token %}
+                              <input type="submit" action="" value="Yes, delete." />
+                            </form>
+                        {% endblock %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

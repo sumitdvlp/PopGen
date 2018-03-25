@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>PopGen</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  <style type="text/css">
+      #accountForm {
+    margin-top: 15px;
+    }
+      .bg-1 {
+       background-color: #1abc9c; /* Green */
+        color: #ffffff;
+      }
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+           bottom:0;
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'JobSchd:index' %}">Popgen</a>
+            <ul class="nav navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="">
+                <a href="{% url 'JobSchd:user_details'  user.id%}">
+                    <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;
+                    Jobs
+                </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'JobSchd:jobform_final' %}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+                        Job_Form_Final
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% url 'JobSchd:auth_logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+                        Logout
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'JobSchd:auth_login' %}">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;
+                        Login
+                    </a>
+                </li>
+            </ul>
+          {% endif %}
+        </div>
+  </div>
+</nav>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#job-tab" data-toggle="tab">Job/Project Details <i class="fa"></i></a></li>
+    <li><a href="#Entities-tab" data-toggle="tab">Entities <i class="fa"></i></a></li>
+    <li><a href="#Column-Names-tab" data-toggle="tab">Column Names <i class="fa"></i></a></li>
+    <li><a href="#Input-Files-tab" data-toggle="tab">Input Files <i class="fa"></i></a></li>
+    <li><a href="#Control-Variables-tab" data-toggle="tab">Control Variables <i class="fa"></i></a></li>
+    <li><a href="#Parameters-tab" data-toggle="tab">Parameters <i class="fa"></i></a></li>
+    <li><a href="#Reweighting-tab" data-toggle="tab">Reweighting <i class="fa"></i></a></li>
+    <li><a href="#Draws-tab" data-toggle="tab">Draws <i class="fa"></i></a></li>
+    <li><a href="#Geos-To-Synthesize-tab" data-toggle="tab">Geos To Synthesize <i class="fa"></i></a></li>
+    <li><a href="#Outputs-tab" data-toggle="tab">Outputs <i class="fa"></i></a></li>
+    <li><a href="#Multiway-One-tab" data-toggle="tab">Multiway One <i class="fa"></i></a></li>
+    <li><a href="#Multiway-Two-tab" data-toggle="tab">Multiway Two <i class="fa"></i></a></li>
+</ul>
+
+<form action="" id="jobform" method="post" enctype="multipart/form-data" class="form-horizontal">
+    {% block content %}
+    {% csrf_token %}
+        <br>
+    <div class="tab-content">
+        <div class="tab-pane active" id="job-tab">
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.synthesize.label}}</label>
+                <div class="col-xs-5">
+                    <input type="checkbox" class="form-control" name={{ form.synthesize }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.job_name.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.job_name }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.project_name.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.project_name }}>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tab-pane " id="Entities-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.entities.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.entities }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.housing_entities.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.housing_entities }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.person_entities.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.person_entities }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Column-Names-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.hid.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.hid }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.pid.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.pid }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.geo }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.region }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.sample_geo.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.sample_geo }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Input-Files-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_to_sample.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.geo_to_sample }}>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_to_geo.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.region_to_geo }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_to_sample.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.region_to_sample }}>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.sample_household.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.sample_household }}>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.sample_person.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.sample_person }}>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.sample_groupquarter.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.sample_groupquarter }}>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_household_files.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.geo_household_files }}>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_person_files.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.geo_person_files }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_groupquarter_files.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.geo_groupquarter_files }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_household_files.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.region_household_files }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_person_files.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.region_person_files }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_groupquarter_files.label}}</label>
+                <div class="col-xs-5">
+                    <input type="file" class="form-control" name={{ form.region_groupquarter_files }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Control-Variables-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.desc.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.desc }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.arc.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.arc }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_household.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.region_household }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_groupquarter.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.region_groupquarter }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_person.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.region_person }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_household.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.geo_household }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_groupquarter.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.geo_groupquarter }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_person.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.geo_person }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Parameters-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.ipf_tolerance.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.ipf_tolerance }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.iterations.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.iterations }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.zmc.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.zmc }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.rp.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.rp }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.rp.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.apf }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Reweighting-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.procedure.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.procedure }}>
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.rew_tolerance.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.rew_tolerance }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.inner_iterations.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.inner_iterations }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.outer_iterations.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.outer_iterations }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.rapf.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.rapf }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Draws-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.procedure.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.procedure }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.draws_iterations.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.draws_iterations }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.seed.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.seed }}>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane " id="Geos-To-Synthesize-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_ids.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.region_ids }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.region_all_ids.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.region_all_ids }}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_ids.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.geo_ids }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.geo_all_ids.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.geo_all_ids }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Outputs-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.performance.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.performance }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.export.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.export }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.collate_across_geos.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.collate_across_geos }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Multiway-One-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.multiway_variables_one.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.multiway_variables_one }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.filename_one.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.filename_one }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.filetype_one.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.filetype_one }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.entity_one.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.entity_one }}>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane " id="Multiway-Two-tab">
+             <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.multiway_variables_two.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.multiway_variables_two }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.filename_two.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.filename_two }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.filetype_two.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.filetype_two }}>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3 control-label">{{form.entity_two.label}}</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name={{ form.entity_two }}>
+                </div>
+            </div>
+        </div>
+    </div>
+        <input type="submit" value="Submit" />
+    {% endblock content %}
+</form>
+
+  <script>
+$(document).ready(function() {
+    $('#jobform')
+        .formValidation({
+            framework: 'bootstrap',
+            // Only disabled elements are excluded
+            // The invisible elements belonging to inactive tabs must be validated
+            excluded: [':disabled'],
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                "{{ form.job_name }}": {
+                    validators: {
+                        notEmpty: {
+                            message: 'The job_name is required'
+                        }
+                    }
+                },
+                company: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The company name is required'
+                        }
+                    }
+                },
+                address: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The address is required'
+                        }
+                    }
+                },
+                city: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The city is required'
+                        }
+                    }
+                }
+            }
+        })
+        // Called when a field is invalid
+        .on('err.field.fv', function(e, data) {
+            // data.element --> The field element
+
+            var $tabPane = data.element.parents('.tab-pane'),
+                tabId    = $tabPane.attr('id');
+
+            $('a[href="#' + tabId + '"][data-toggle="tab"]')
+                .parent()
+                .find('i')
+                .removeClass('fa-check')
+                .addClass('fa-times');
+        })
+        // Called when a field is valid
+        .on('success.field.fv', function(e, data) {
+            // data.fv      --> The FormValidation instance
+            // data.element --> The field element
+
+            var $tabPane = data.element.parents('.tab-pane'),
+                tabId    = $tabPane.attr('id'),
+                $icon    = $('a[href="#' + tabId + '"][data-toggle="tab"]')
+                            .parent()
+                            .find('i')
+                            .removeClass('fa-check fa-times');
+
+            // Check if all fields in tab are valid
+            var isValidTab = data.fv.isValidContainer($tabPane);
+            if (isValidTab !== null) {
+                $icon.addClass(isValidTab ? 'fa-check' : 'fa-times');
+            }
+        });
+});
+</script>
+
+<footer class="container-fluid text-center">
+  <a target="_blank" href="http://www.mobilityanalytics.org/popgen.html" style="color: rgb(255,255,255)">About Popgen</a> | &nbsp;
+  <a href="mailto:" style="color: rgb(255,255,255)">Contact Us</a> | &nbsp;
+  <a href="{% url 'JobSchd:team' %}" style="color: rgb(255,255,255)">The Team</a>
+</footer>
+
+</body>
+</html>

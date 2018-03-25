@@ -1,0 +1,23 @@
+{% extends 'JobSchd/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+{% block body %}
+    <div class="container-fluid">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>Create/Update a Job</h3>
+
+                        <h5>** We are still in our Beta Stage and will be improving , Please fill the form very carefully</h5>
+                        <p>Refer this <a href="{%  static 'Example_Input_Data_For_Popgen.zip' %}"> link </a> to get an example of the Yaml and other related file</p>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% block content %}
+                           {% csrf_token %}
+                           {{ form.job_name }}
+                           <input type="submit" value="Update" />
+                        {% endblock content %}
+                    </form>
+                    </div>
+                </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,175 @@
+			<form id="uploader" method="post" enctype="multipart/form-data">
+                              <div class="row flex-just-center cells3">
+                <div class="cell size3">
+                  <h4>a. Select Sample Files
+                  </h4>
+                </div>
+                              </div>
+              <div class="row flex-just-center cells3">
+                <div class="cell size3">
+                  <p>Select Household Sample File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="household_sample" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="cell size3">
+                  <p>Select Person Sample File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="person_sample" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="cell size3">
+                  <p>Select Groupquarter Sample File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="groupquarter_sample" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row flex-just-center cells3">
+                <div class="cell size3">
+                  <h4>b. Select {{ aggregate }}-Marginal Files
+                  </h4>
+                </div>
+              </div>
+              <div class="row flex-just-center cells3">
+                <div class="cell size3">
+                  <p>Select Household Marginal File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="region_household_marginal" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="cell size3">
+                  <p>Select Person Marginal File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="region_person_marginal" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="cell size3">
+                  <p>Select Groupquarter Marginal File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="region_groupquarter_marginal" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Replace 'Geo' with Disaggregate Spatial and Region with 'Aggregate' spatial -->
+              <div class="row flex-just-center cell3">
+                <div class="cell size3">
+                  <h4>c. Select {{ disaggregate }}-Marginal Files
+                  </h4>
+                </div>
+              </div>
+              <div class="row flex-just-center cells3">
+                <div class="cell size3">
+                  <p>Select Household Marginal File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="geo_household_marginal" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="cell size3">
+                  <p>Select Person Marginal File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="geo_person_marginal" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="cell size3">
+                  <p>Select Groupquarter Marginal File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="geo_groupquarter_marginal" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row flex-just-center cells3">
+                <div class="cell size3">
+                  <h4>d. Select Mapping Files
+                  </h4>
+                </div>
+              </div>
+              <div class="row flex-just-center cells3">
+                <div class="cell size3">
+                  <p>Select {{ aggregate }}-{{ disaggregate }} Mapping File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="region_geo_mapping" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="cell size3">
+                  <p>Select {{ sampleu }}-{{ aggregate }} Mapping File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="region_sample_mapping" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="cell size3">
+                  <p>Select {{ sampleu }}-{{ disaggregate }} Mapping File
+                  </p>
+                  <div class="input-control modern file" data-role="input">
+                    <input name="geo_sample_mapping" type="file" accept=".csv,.txt,.dat">
+                    <button class="button">
+                      <span class="mif-folder">
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row flex-just-center cells3">
+				<div class="cell size3">
+					<p>Click to Update Variable List</p>
+					<input type="submit" value="Update">
+				</div>
+			  </div>
+
+
+			  </form>

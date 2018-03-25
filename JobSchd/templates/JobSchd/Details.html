@@ -1,0 +1,50 @@
+{% extends 'JobSchd/base.html' %}
+{% block title %}User Job Details{% endblock %}
+{% block body %}
+
+
+    {% if error_msg %}
+        <p><strong>{{ error_msg }}</strong></p>
+    {% endif %}
+
+    <div class="container">
+    <h4>Here all your Jobs</h4>
+        <p>You Can Update/Delete and see the Job Status from this Page.</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Job Name</th>
+        <th>Update The Job </th>
+        <th>Delete The Job</th>
+        <th>Job Status Details</th>
+        <th>Output File Download Link</th>
+      </tr>
+    </thead>
+    <tbody>
+     {% for job in user.jobfinal_set.all %}
+      <tr>
+        <td>{{ job.job_name }}</td>
+        <td><a href="{% url 'JobSchd:jobform_final_update' job.id %}">Update</a></td>
+        <td><a href="{% url 'JobSchd:jobform_final_delete' job.id %}">Delete</a></td>
+        <td>    {% if job.job_status == "Completed" %}
+                    Job Run has completed successfully
+                {% elif job.job_status == "In-Progress"%}
+                    Job Run is in progress
+                {% elif job.job_status == "Submitted"%}
+                    Submitted
+                {% elif job.job_status == "Yaml Error"%}
+                    There is an Error in your Input or Input File, Please check your input and submit the job again.
+                {% elif job.job_status == "System Error"%}
+                    There is a system error, we are working on it.
+                {% endif %}
+        </td>
+        <td>{% if job.job_status == "Completed" %}
+                    <a href="{{ job.op_file_url }}">Result</a>
+            {% endif %}
+        </td>
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
