@@ -4,3 +4,4 @@ gunicorn_supervisor.log
 nginx-access.log
 nginx-error.log
 file/
+.idea/
